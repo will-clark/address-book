@@ -1,7 +1,6 @@
 <%@ page
     import="java.net.URL"
-    import="java.util.Map"
-    import="java.util.HashMap"  
+    import="java.util.*"
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%

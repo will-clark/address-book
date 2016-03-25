@@ -1,7 +1,6 @@
 package org.willclark.addressbook;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -188,6 +187,7 @@ public class Params {
 	}
 
 	private void init() {
+		@SuppressWarnings("unchecked")
 		Map<String, String[]> params = request.getParameterMap();
 		map = new HashMap<String, String>(0);
 		for (String key : params.keySet()) {

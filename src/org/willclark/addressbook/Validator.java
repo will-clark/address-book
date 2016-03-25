@@ -35,7 +35,7 @@ public class Validator {
 	}
 	
 	public void validate(Object object, String[] bypass) {
-		Class pojoClass = object.getClass();
+		Class<? extends Object> pojoClass = object.getClass();
 		Field[] fields = pojoClass.getDeclaredFields();
 
 		for(Field field: fields) {			
@@ -92,6 +92,7 @@ public class Validator {
 		errors.put(key, messages);
 	}
 		
+	@SuppressWarnings("rawtypes")
 	private boolean skip(Class objClazz, Field objField, String[] bypass) {
 		if (bypass != null) {	
 			for(String each : bypass) {

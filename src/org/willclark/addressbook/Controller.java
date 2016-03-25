@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,13 +24,18 @@ public abstract class Controller extends HttpServlet {
 		defaultAction = defaultAction();
 		if (defaultAction == null) throw new ServletException("A default action was not specified");
 		
-		System.out.println("Loaded Controller with Base Path of: /"+basePath());
+		System.out.println("Loaded Controller with Base Path of: "+basePath());
 		
 	}
 	
 	protected abstract void initActions();
 	protected abstract Action defaultAction();
-	protected abstract String basePath();
+	
+	protected String basePath() { 
+		WebServlet webServlet = this.getClass().getAnnotation(WebServlet.class);
+		String urlPattern = webServlet.value()[0];
+		return urlPattern.substring(0, urlPattern.lastIndexOf("/*"));
+	}
 		
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getPathInfo();
